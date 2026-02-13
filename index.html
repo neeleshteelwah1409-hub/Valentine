@@ -90,6 +90,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            gap: 40px;
         }
 
         .yes-wrapper {
@@ -126,10 +127,7 @@
         #noBtn {
             background: linear-gradient(135deg, #c084fc 0%, #e879f9 100%);
             color: white;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(80px, -50%);
+            position: relative;
             z-index: 5;
             transition: all 0.2s ease;
         }
@@ -469,6 +467,11 @@
             noClickCount++;
 
             if (noClickCount < maxClicks) {
+                // First click - change to absolute positioning
+                if (noClickCount === 1) {
+                    noBtn.style.position = 'absolute';
+                }
+                
                 // Add moving class for smooth transition
                 noBtn.classList.add('moving');
                 
@@ -486,9 +489,10 @@
                 // Convert No button to Yes button
                 noBtn.textContent = 'Yes! 💕';
                 noBtn.style.background = 'linear-gradient(135deg, #ff1493 0%, #ff6b9d 100%)';
-                noBtn.style.position = 'static';
+                noBtn.style.position = 'relative';
+                noBtn.style.left = 'auto';
+                noBtn.style.top = 'auto';
                 noBtn.style.transform = 'scale(1)';
-                noBtn.style.margin = '0 0 0 30px';
                 noBtn.classList.remove('moving');
                 
                 // Make it clickable to show success
