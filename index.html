@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>For My Love ❤️</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 48px;
+      color: white;
+      margin-bottom: 40px;
+    }
+
+    .container {
+      position: relative;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 20px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      margin: 10px;
+      transition: 0.3s;
+    }
+
+    .yes {
+      background-color: #ff4d6d;
+      color: white;
+    }
+
+    .no {
+      background-color: #333;
+      color: white;
+      position: absolute;
+    }
+
+    .arrows {
+      font-size: 24px;
+      color: white;
+      margin-bottom: 10px;
+      animation: bounce 1s infinite;
+    }
+
+    @keyframes bounce {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+      100% { transform: translateY(0); }
+    }
+
+    #result {
+      display: none;
+      margin-top: 30px;
+      color: white;
+      font-size: 32px;
+      animation: pop 0.5s ease;
+    }
+
+    @keyframes pop {
+      from { transform: scale(0.5); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    #photo {
+      width: 220px;
+      border-radius: 15px;
+      margin-top: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+
+    .heart {
+      position: absolute;
+      color: red;
+      font-size: 20px;
+      animation: float 4s linear infinite;
+    }
+
+    @keyframes float {
+      from { transform: translateY(0); opacity: 1; }
+      to { transform: translateY(-800px); opacity: 0; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>Will you be my Valentine? 💖</h1>
+
+    <div class="arrows">⬇️⬇️⬇️ YES YES YES ⬇️⬇️⬇️</div>
+
+    <div style="position: relative; height: 80px;">
+      <button class="yes" onclick="showLove()">Yes ❤️</button>
+      <button class="no" id="noBtn" onclick="moveNo()">No 😢</button>
+    </div>
+
+    <div id="result">
+      Yayyyy!!! 💕<br>
+      <img id="photo" src="2.jpeg">
+    </div>
+
+  </div>
+
+  <script>
+    let noClicks = 0;
+
+    function moveNo() {
+      const btn = document.getElementById("noBtn");
+
+      noClicks++;
+
+      if (noClicks >= 10) {
+        btn.innerText = "Yes ❤️";
+        btn.classList.remove("no");
+        btn.classList.add("yes");
+        btn.style.position = "static";
+        btn.onclick = showLove;
+        return;
+      }
+
+      const x = Math.random() * (window.innerWidth - 100);
+      const y = Math.random() * (window.innerHeight - 50);
+
+      btn.style.left = x + "px";
+      btn.style.top = y + "px";
+    }
+
+    function showLove() {
+      document.getElementById("result").style.display = "block";
+      spawnHearts();
+    }
+
+    function spawnHearts() {
+      for (let i = 0; i < 25; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "💖";
+
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.top = Math.random() * window.innerHeight + "px";
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 4000);
+      }
+    }
+  </script>
+
+</body>
+</html>
